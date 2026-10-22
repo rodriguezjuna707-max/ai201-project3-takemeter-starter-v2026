@@ -42,6 +42,29 @@
 <!-- Your community, and what your classifier sorts posts into. Three or four
      sentences. -->
 
+**Community:** r/ValueInvesting on Reddit, specifically threads discussing
+micro-cap, small-cap, and deeply discounted or underappreciated value stocks.
+
+**Candidate distinctions observed while reading:**
+
+1. **Concrete accounting metrics vs. pure narrative claims.** Some posts present
+   verifiable accounting metrics, financial ratio calculations (P/E, P/B,
+   EV/EBITDA, Net Debt/EBITDA), or cash-flow figures taken from SEC filings.
+   Others present purely qualitative growth narratives, short squeeze
+   assertions, or target price predictions with no balance sheet figures.
+2. **Interrogative / procedural syntax vs. thesis declarations.** A subset of
+   posts doesn't advocate for or analyze a specific stock at all. Instead they
+   ask the community about valuation methodology (DCF model inputs, handling
+   stock-based compensation), portfolio allocation limits, or screening tools.
+3. **Promotional hype language vs. objective financial tone.** Speculative posts
+   lean on hype words, exclamation points, and forward-looking hyperbole ("10x
+   potential", "to the moon", "guaranteed 5x play", "multi-bagger"), while
+   analytical posts keep a formal, financial-reporting tone.
+4. **Short-term catalyst speculation vs. margin of safety / asset backing.**
+   Speculative content focuses on upcoming short-term events (FDA approvals,
+   earnings surprises, low-float short squeezes), whereas fundamental analyses
+   focus on liquidation value, net cash per share, margin of safety, or steady
+   free cash flow yields.
 
 
 ---
