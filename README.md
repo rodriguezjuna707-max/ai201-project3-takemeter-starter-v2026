@@ -213,11 +213,16 @@ are marked `pre-labeled`.
 > in `investor_inquiry`.
 
 **3.**
-> *The post:*
+> *The post:* (data row 92) "Penny stock alert: Huge catalyst loading next
+> week! Insider buying is crazy and this will gap up 200% on Monday open. Load
+> up!"
 >
-> *Could have been:*
+> *Could have been:* `speculative_hype` or `fundamental_analysis`
 >
-> *I chose, because:*
+> *I chose, because:* `speculative_hype`. It cites a number (200%) and mentions
+> insider buying, but the number is a forward-looking price-surge prediction,
+> not a verifiable balance sheet or financial statement figure, so my decision
+> rule doesn't count it as support.
 
 ---
 
