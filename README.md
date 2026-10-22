@@ -154,10 +154,22 @@ question to the community, it's `investor_inquiry` even when it quotes a ratio
 <!-- Where you collected from, how you labelled, your counts, and three hard
      cases. -->
 
-**Where the posts came from:**
+**Where the posts came from:** r/ValueInvesting on Reddit. I collected posts by
+manually browsing, searching, and copying public text from subreddit threads
+discussing small-cap, micro-cap, and value-oriented equities. Whole posts and
+comments were kept intact, without shortening or trimming, to preserve the
+community's natural style and context. Nothing came from behind a login wall or
+a private, invite-only group.
 
 **How I labelled them:** <!-- Cold first? Pre-labelled with AI and corrected?
 Say so plainly — the disclosure is required, not penalised. -->
+Cold first: 60 posts (the first 20 of each label in `labels.csv`, data rows
+1–20, 86–105 and 151–170) were labelled entirely by hand using only my written
+definitions, with no AI or other tools, and are marked `cold`. The remaining
+145 were pre-labelled in batches by an AI assistant (Claude) given my exact
+label definitions and decision rule, then I read every one and corrected the
+label where needed (about 15% of them). Those rows are marked `pre-labeled`.
+See How I Used AI.
 
 **Counts per label:**
 
@@ -177,18 +189,28 @@ are marked `pre-labeled`.
      been, and what you chose. These are worth more than the easy 190. -->
 
 **1.**
-> *The post:*
+> *The post:* (data row 1) "HGBL trades at 0.65x Price to Tangible Book Value
+> with shareholder equity around $65M. Net cash sits at $14M and Enterprise
+> Value is under $30M, providing a massive margin of safety despite credit
+> losses."
 >
-> *Could have been:*
+> *Could have been:* `speculative_hype` or `fundamental_analysis`
 >
-> *I chose, because:*
+> *I chose, because:* `fundamental_analysis`. "Massive margin of safety" is
+> enthusiastic, bullish phrasing, but the post is built on concrete accounting
+> figures ($65M equity, $14M net cash, 0.65x P/TBV), which is exactly what my
+> decision rule says decides it.
 
 **2.**
-> *The post:*
+> *The post:* (data row 162) "Can someone explain why a company would trade at
+> 0.5x Book Value if it generates positive operating cash flow?"
 >
-> *Could have been:*
+> *Could have been:* `investor_inquiry` or `fundamental_analysis`
 >
-> *I chose, because:*
+> *I chose, because:* `investor_inquiry`. It quotes real metrics (0.5x Book
+> Value, operating cash flow), but it is a question asking the community for an
+> explanation rather than a thesis about a stock, so my secondary rule puts it
+> in `investor_inquiry`.
 
 **3.**
 > *The post:*
@@ -244,7 +266,28 @@ jumpiest across seeds.
      workflow and disclosing it costs you nothing. Not disclosing it is the
      problem. -->
 
-**Moment 1**
+**Moment 1 — stress-testing the taxonomy boundary**
+
+- *What I asked for:* I gave the AI my initial label definitions and ambiguous
+  borderline posts and asked it to make the strongest case for each of the two
+  competing labels, without rewriting my definitions.
+- *What came back:* It surfaced how much promotional hype and valuation metrics
+  overlap, since hype posts also contain numbers ("10x", "200% gain").
+- *What I changed:* That prompted the strict decision rule in Label Taxonomy:
+  only an accounting figure from the company's financials counts as support, so
+  a post with real financial figures is `fundamental_analysis` even if its tone
+  is enthusiastic.
+
+**Moment 2 — batch pre-labelling**
+
+- *What I asked for:* I gave the AI my label rules alongside batches of
+  r/ValueInvesting posts and asked for suggested labels and note markers.
+- *What came back:* Suggested labels for the 145 non-cold posts.
+- *What I changed:* I reviewed every suggestion and corrected roughly 15% of
+  them, mostly posts where emotional tone had been allowed to outweigh the
+  financial metrics actually in the post.
+
+**Moment 3 — catching duplicated rows**
 
 - *What I asked for:* I asked Claude Code to check `labels.csv` against the
   Milestone 4 requirements before committing it.
@@ -258,7 +301,7 @@ jumpiest across seeds.
   posts, bringing the file back to 205 rows with zero duplicates (checked even
   after ignoring case and punctuation) before committing it.
 
-**Moment 2**
+**Moment 4 — fixing the training crash**
 
 - *What I asked for:* Section 4 of the notebook crashed with
   `TypeError: Pickler._batch_setitems() takes 2 positional arguments but 3 were
@@ -280,9 +323,9 @@ against `labels.csv`; the criteria and their numbers are my own.
 
 **Pre-labelling disclosure:** The 60 rows marked `cold` (20 per label) I
 labelled by hand with no tool. The other 145 rows, marked `pre-labeled`, were
-pre-labelled by **[TODO: name the AI tool]** using my label definitions, and I
-**[TODO: say whether you read and corrected every one, and roughly how many
-labels you changed]**.
+pre-labelled in batches by Claude using my label definitions and decision rule.
+I read every one and corrected about 15% of the suggested labels before
+finalizing `labels.csv`.
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
