@@ -246,17 +246,43 @@ jumpiest across seeds.
 
 **Moment 1**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* I asked Claude Code to check `labels.csv` against the
+  Milestone 4 requirements before committing it.
+- *What came back:* It found that 145 of my 205 rows were really 35 posts
+  repeated four or five times, each copy hidden behind a numbered prefix like
+  `[1]`, `[16]`, `[31]`. Only 95 rows were distinct, below the 150 floor, and
+  the notebook's exact-duplicate check would have missed them because of the
+  prefixes. The random split would then have put copies of the same post in
+  both train and test, inflating every score.
+- *What I changed:* I removed the repeated rows and replaced them with distinct
+  posts, bringing the file back to 205 rows with zero duplicates (checked even
+  after ignoring case and punctuation) before committing it.
 
 **Moment 2**
 
-- *What I asked for:*
-- *What came back:*
-- *What I changed:*
+- *What I asked for:* Section 4 of the notebook crashed with
+  `TypeError: Pickler._batch_setitems() takes 2 positional arguments but 3 were
+  given`, and I asked Claude Code to get training working.
+- *What came back:* It traced the error to my virtual environment running
+  Python 3.14, which `requirements.txt` and `test.py` both say the pinned
+  packages don't support, and pointed out `test.py` was already failing on
+  exactly that.
+- *What I changed:* I rebuilt `.venv` with Python 3.13, reinstalled the
+  requirements, confirmed `python test.py` passed, and then ran sections 1–5
+  with the default settings.
 
-**Pre-labelling disclosure:**
+**Other AI help, disclosed:** Claude Code drafted the wording of my label
+definitions and the decision rule in Label Taxonomy from my own dataset summary,
+and derived the rule from how my existing labels already split the
+`fundamental_analysis` / `speculative_hype` boundary. It also checked my five
+acceptance criteria for testability and verified the facts my reasons cite
+against `labels.csv`; the criteria and their numbers are my own.
+
+**Pre-labelling disclosure:** The 60 rows marked `cold` (20 per label) I
+labelled by hand with no tool. The other 145 rows, marked `pre-labeled`, were
+pre-labelled by **[TODO: name the AI tool]** using my label definitions, and I
+**[TODO: say whether you read and corrected every one, and roughly how many
+labels you changed]**.
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
