@@ -163,10 +163,13 @@ Say so plainly — the disclosure is required, not penalised. -->
 
 | Label | Count | Share |
 |---|---|---|
-|  |  |  |
-|  |  |  |
-|  |  |  |
-| **Total** |  | 100% |
+| `fundamental_analysis` | 85 | 41.5% |
+| `speculative_hype` | 65 | 31.7% |
+| `investor_inquiry` | 55 | 26.8% |
+| **Total** | 205 | 100% |
+
+No label is above 70%. 60 rows (20 per label) are marked `cold`; the other 145
+are marked `pre-labeled`.
 
 **Three hard cases**
 
@@ -200,16 +203,34 @@ Say so plainly — the disclosure is required, not penalised. -->
 
 <!-- Your starting model, your settings, and anything you changed and why. -->
 
-**Base model:**
+**Base model:** `distilbert-base-uncased`
 
 **Settings:** <!-- epochs, learning rate, batch size, seed -->
+3 epochs, learning rate 2e-5, batch size 16, max length 128 tokens, seed 42.
 
-**Anything I changed from the defaults, and why:**
+**Anything I changed from the defaults, and why:** No hyperparameters were
+changed; this is the default run. The one environment change: my first
+attempt failed in section 4 (`TypeError: Pickler._batch_setitems()`) because
+my virtual environment used Python 3.14, which the pinned packages don't
+support. I rebuilt `.venv` with Python 3.13 and `python test.py` passed before
+training.
+
+**Device:** `cpu` (torch `2.14.1+cpu`), as recorded in `results.json`.
 
 **Split sizes:** <!-- train / val / test, and per-label counts in the test
 split. If a label had fewer than about 8 in test, say so — it explains a lot
 of next unit's variance. -->
 
+| Label | Train | Val | Test |
+|---|---|---|---|
+| `fundamental_analysis` | 59 | 13 | 13 |
+| `speculative_hype` | 45 | 10 | 10 |
+| `investor_inquiry` | 39 | 8 | 8 |
+| **Total** | 143 | 31 | 31 |
+
+`investor_inquiry` has only 8 posts in the test split, right at the edge where
+one misclassification moves its F1 noticeably, so expect its score to be the
+jumpiest across seeds.
 
 
 ---
