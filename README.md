@@ -45,6 +45,12 @@
 **Community:** r/ValueInvesting on Reddit, specifically threads discussing
 micro-cap, small-cap, and deeply discounted or underappreciated value stocks.
 
+The classifier sorts each post into one of three labels:
+`fundamental_analysis` (backed by real financial figures), `speculative_hype`
+(price targets and promotion without balance sheet data), or
+`investor_inquiry` (questions to the community about method, allocation, or
+tools).
+
 **Candidate distinctions observed while reading:**
 
 1. **Concrete accounting metrics vs. pure narrative claims.** Some posts present
@@ -77,34 +83,68 @@ micro-cap, small-cap, and deeply discounted or underappreciated value stocks.
      The decision rule is worth a point on its own and it's the thing most
      people leave out. Every taxonomy has a hardest boundary. Name yours. -->
 
-### `label_one`
+### `fundamental_analysis`
 
-**Definition:**
-
-**Example 1:**
->
-
-**Example 2:**
->
-
-### `label_two`
-
-**Definition:**
+**Definition:** A post that backs its view of a stock with concrete accounting
+metrics, financial ratios, valuation models, or cash-flow figures.
 
 **Example 1:**
->
+> HGBL trades at 0.65x Price to Tangible Book Value with shareholder equity
+> around $65M. Net cash sits at $14M and Enterprise Value is under $30M,
+> providing a massive margin of safety despite credit losses.
 
 **Example 2:**
->
+> Shift4 ($FOUR) is currently trading at an 8.6 forward P/E despite generating
+> over $250M in free cash flow annually and posting 21% YoY revenue growth.
+> Enterprise value to EBITDA is just 6.2x.
+
+### `speculative_hype`
+
+**Definition:** A post that makes price target claims, short squeeze
+assertions, or promotional predictions without any quantitative balance sheet
+data to support them.
+
+**Example 1:**
+> ASTS is going to be a multi-bagger! Tripled digit share price coming in 2030
+> as space-cellular technology dominates global Telecom. Buy and hold now!
+
+**Example 2:**
+> LPSN short squeeze incoming! Short interest is huge on tiny free float. Once
+> news hits this stock is rocketing back to all-time highs!
+
+### `investor_inquiry`
+
+**Definition:** A post that asks the community for guidance on valuation
+methodology, portfolio allocation, or screening tools rather than arguing for
+a specific stock.
+
+**Example 1:**
+> When doing undervalued stock analysis, what are your golden steps? Do you
+> look at DCF models or focus primarily on Price to Book ratios?
+
+**Example 2:**
+> How do you evaluate high Debt/Equity ratios in cyclical sectors like
+> homebuilding or shipping? What metrics indicate a value trap?
 
 ### The hardest boundary
 
-**Which two labels:**
+**Which two labels:** `fundamental_analysis` and `speculative_hype`
 
 **The decision rule I used every time:**
 <!-- e.g. "If the post names a specific checkable fact, it's `analysis`, even
      if the tone is heated." -->
 
+A number only counts as support if it is an accounting figure or ratio taken
+from the company's financials (P/E, EV/EBITDA, book value, free cash flow,
+debt, margins). Predicted returns and price targets ("10x", "200% gain",
+"turn $1k into $50k") don't count. So a post whose only numbers are projected
+gains is `speculative_hype`, and a post that cites real financial figures is
+`fundamental_analysis` even if its tone is enthusiastic ("massive margin of
+safety").
+
+A secondary rule for `investor_inquiry`: if the post's main purpose is a
+question to the community, it's `investor_inquiry` even when it quotes a ratio
+("Can someone explain why a company would trade at 0.5x Book Value...?").
 
 
 ---
