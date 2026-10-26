@@ -393,27 +393,52 @@ behind at +0.429.
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Overall accuracy | ≥ 0.80 | 1.000 | 1.000 | 1.000 |  |
+| 2. F1 — `investor_inquiry` | ≥ 0.80 | 1.000 | 1.000 | 1.000 |  |
+| 3. `speculative_hype` predicted as `fundamental_analysis` | ≤ 0.20 of the hype row | 0.00 (0/10) | 0.00 (0/10) | 0.00 (0/10) |  |
+| 4. Predicted vs. true `fundamental_analysis` share | differ by ≤ 10 pts | 0 pts (13/31 vs 13/31) | 0 pts (13/31 vs 13/31) | 0 pts (13/31 vs 13/31) |  |
+| 5. Agreement with staff labels | ≥ 0.70 | *pending (Milestone 3)* | | |  |
+
+**Device:** `cpu` (CPU), recorded in `results_three_seeds_before.json` for
+every seed. Seeds 42, 7 and 2024; 3 epochs, learning rate 2e-5, batch size 16,
+128 tokens. Criterion 5 doesn't depend on the seed: it is one agreement rate
+from `agreement.py`.
+
+Spread table from section 6:
+
+| Measure | Seed 42 | Seed 7 | Seed 2024 | Spread |
+|---|---|---|---|---|
+| Overall accuracy | 1.000 | 1.000 | 1.000 | 0.000 |
+| Macro F1 | 1.000 | 1.000 | 1.000 | 0.000 |
+| F1 — `fundamental_analysis` | 1.000 | 1.000 | 1.000 | 0.000 |
+| F1 — `speculative_hype` | 1.000 | 1.000 | 1.000 | 0.000 |
+| F1 — `investor_inquiry` | 1.000 | 1.000 | 1.000 | 0.000 |
+
+Accuracy moved 0.000 across seeds, so the result isn't a friendly draw from
+one split. I also checked for leakage: on all three seeds, no test post is
+more than 80% similar to any training post, so the model is not scoring well
+by seeing near-copies of test posts.
 
 ### Confusion matrix
 
 <!-- ⚠️ TYPED AS A MARKDOWN TABLE. The notebook prints one ready to paste.
      An image of a matrix earns nothing. -->
 
-| true \ predicted |  |  |  |
+Seed 42 (seeds 7 and 2024 are identical):
+
+| true \ predicted | fundamental_analysis | speculative_hype | investor_inquiry |
 |---|---|---|---|
-| **** |  |  |  |
-| **** |  |  |  |
-| **** |  |  |  |
+| **fundamental_analysis** | 13 | 0 | 0 |
+| **speculative_hype** | 0 | 10 | 0 |
+| **investor_inquiry** | 0 | 0 | 8 |
 
 **My biggest off-diagonal number, and what it means:**
 <!-- Not "the model made mistakes" — WHICH boundary it didn't learn, and which
      direction. "7 real analysis posts were called hot_take and only 3 went the
      other way" is a direction, not just an error rate. -->
+There isn't one: every off-diagonal cell is 0 on all three seeds, so the model
+confused no pair of labels in either direction, including the
+`speculative_hype` → `fundamental_analysis` boundary I expected to be riskiest.
 
 
 
@@ -511,11 +536,31 @@ behind at +0.429.
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Overall accuracy | ≥ 0.80 | 1.000 | 1.000 | 1.000 |  |
+| 2. F1 — `investor_inquiry` | ≥ 0.80 | 1.000 | 1.000 | 1.000 |  |
+| 3. `speculative_hype` predicted as `fundamental_analysis` | ≤ 0.20 of the hype row | 0.00 (0/10) | 0.00 (0/10) | 0.00 (0/10) |  |
+| 4. Predicted vs. true `fundamental_analysis` share | differ by ≤ 10 pts | 0 pts (13/31 vs 13/31) | 0 pts (13/31 vs 13/31) | 0 pts (13/31 vs 13/31) |  |
+| 5. Agreement with staff labels | ≥ 0.70 | *pending (Milestone 3)* | | |  |
+
+**Device:** `cpu` (CPU), recorded in `results_three_seeds_before.json` for
+every seed. Seeds 42, 7 and 2024; 3 epochs, learning rate 2e-5, batch size 16,
+128 tokens. Criterion 5 doesn't depend on the seed: it is one agreement rate
+from `agreement.py`.
+
+Spread table from section 6:
+
+| Measure | Seed 42 | Seed 7 | Seed 2024 | Spread |
+|---|---|---|---|---|
+| Overall accuracy | 1.000 | 1.000 | 1.000 | 0.000 |
+| Macro F1 | 1.000 | 1.000 | 1.000 | 0.000 |
+| F1 — `fundamental_analysis` | 1.000 | 1.000 | 1.000 | 0.000 |
+| F1 — `speculative_hype` | 1.000 | 1.000 | 1.000 | 0.000 |
+| F1 — `investor_inquiry` | 1.000 | 1.000 | 1.000 | 0.000 |
+
+Accuracy moved 0.000 across seeds, so the result isn't a friendly draw from
+one split. I also checked for leakage: on all three seeds, no test post is
+more than 80% similar to any training post, so the model is not scoring well
+by seeing near-copies of test posts.
 
 **Did it help, and how do I know:**
 
