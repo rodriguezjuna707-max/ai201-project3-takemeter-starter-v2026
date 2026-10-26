@@ -441,7 +441,7 @@ behind at +0.429.
 | 2. F1 — `investor_inquiry` | ≥ 0.80 | 1.000 | 1.000 | 1.000 | MET |
 | 3. `speculative_hype` predicted as `fundamental_analysis` | ≤ 0.20 of the hype row | 0.00 (0/10) | 0.00 (0/10) | 0.00 (0/10) | MET |
 | 4. Predicted vs. true `fundamental_analysis` share | differ by ≤ 10 pts | 0 pts (13/31 vs 13/31) | 0 pts (13/31 vs 13/31) | 0 pts (13/31 vs 13/31) | MET |
-| 5. Agreement with staff labels | ≥ 0.70 | *pending (Milestone 3)* | | | *pending* |
+| 5. Agreement with staff labels | ≥ 0.70 | 1.00 (30/30) | 1.00 (30/30) | 1.00 (30/30) | MET |
 
 **Device:** `cpu` (CPU), recorded in `results_three_seeds_before.json` for
 every seed. Seeds 42, 7 and 2024; 3 epochs, learning rate 2e-5, batch size 16,
@@ -499,7 +499,7 @@ confused no pair of labels in either direction, including the
 | 2 | F1 — `investor_inquiry` | ≥ 0.80 | MET | 1.000 on all three seeds (8 of 8 inquiry posts right each time). |
 | 3 | `speculative_hype` predicted as `fundamental_analysis` | ≤ 0.20 | MET | 0 of 10 hype posts went to `fundamental_analysis` on any seed, so 0.00 every time. |
 | 4 | Predicted vs. true `fundamental_analysis` share | ≤ 10 pts apart | MET | The model predicted 13 of 31 as `fundamental_analysis` on every seed, exactly the true 13, so the gap is 0 pts. |
-| 5 | Agreement with staff labels | ≥ 0.70 | *pending* | Waiting on `agreement.py` (Milestone 3). |
+| 5 | Agreement with staff labels | ≥ 0.70 | MET | `agreement.py` found 30 of 30 matches (1.00). This doesn't depend on the seed, so the same value holds in every column. |
 
 **Diagnoses**
 
@@ -511,8 +511,9 @@ confused no pair of labels in either direction, including the
      ⚠️ Use your agreement report as evidence. It is the only instrument you
      have that can tell a LABELLING problem from a MODEL problem, and this
      section is graded on whether you used it that way. -->
-**No misses on criteria 1–4.** Every target held on all three seeds with no
-errors at all, so there is nothing to diagnose there. Instead, the finding is
+**No misses on any criterion.** Criteria 1–4 held on all three seeds with no
+errors at all, and criterion 5 came in at 30 / 30 against the staff set, so
+there is nothing to diagnose. Instead, the finding is
 that one of my targets was set too low.
 
 **Target set too low: criterion 1, overall accuracy ≥ 0.80.** That target
@@ -550,7 +551,7 @@ its starting point. This is the failure the improvement targets.
      data/staff_taxonomy.md, not your own — so every argument below is made
      from those definitions and those decision rules. -->
 
-**Agreement rate:** ___ / 30 = ___%
+**Agreement rate:** 30 / 30 = 100%
 
 <!-- Nobody grades this number. A 60% who argues every disagreement from the
      stated rules beats a 95% who wrote "staff was right" nine times. Several
@@ -572,25 +573,26 @@ its starting point. This is the failure the improvement targets.
      written rule two different ways on 30 posts, that is direct evidence about
      what you did across your own 200. -->
 
-**1.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
-
-**2.**
-> *The post:*
->
-> *Staff said / I said:*
->
-> *My call, and why:*
->
-> *Which pile:*
+None. `agreement.py` found 0 disagreements, so there is nothing to
+adjudicate and no post falls into pile (a), (b) or (c). My labels are in
+`my_staff_labels.csv` and the comparison is in `agreement_results.json`.
 
 **What the pattern in my disagreements tells me:**
+
+There is no pattern, because there were no disagreements. That isn't because
+the set was all easy: staff flagged 7 of the 30 posts as hard (`sp_005`,
+`sp_010`, `sp_014`, `sp_019`, `sp_020`, `sp_028`, `sp_029`), including
+`sp_014`, which their notes call "the canonical rule-1 case" (a number that
+decorates a conclusion instead of carrying it). I matched all 7. That's
+evidence I apply a written decision rule the way it's written, including on
+the "does the fact carry the argument?" boundary that mirrors my own
+`fundamental_analysis` / `speculative_hype` rule. For the diagnosis, it means
+my clean confusion matrix isn't hiding inconsistent labels.
+
+Two limits. The staff set is 30 posts about running, not stocks, so it tests
+how I apply rules, not my own taxonomy. And 145 of my 205 rows were
+pre-labelled by Claude and corrected by me (see How I Used AI), so this check
+speaks most directly to the 60 `cold` rows and to my corrections.
 
 
 
@@ -618,7 +620,7 @@ committed it (`d4fcfa3`) before the after-run finished.
 | 2. F1 — `investor_inquiry` | ≥ 0.80 | 1.000 | 1.000 | 1.000 | MET |
 | 3. `speculative_hype` predicted as `fundamental_analysis` | ≤ 0.20 of the hype row | 0.00 (0/10) | 0.00 (0/10) | 0.00 (0/10) | MET |
 | 4. Predicted vs. true `fundamental_analysis` share | differ by ≤ 10 pts | 0 pts (13/31 vs 13/31) | 0 pts (13/31 vs 13/31) | 0 pts (13/31 vs 13/31) | MET |
-| 5. Agreement with staff labels | ≥ 0.70 | *pending (Milestone 3)* | | | *pending* |
+| 5. Agreement with staff labels | ≥ 0.70 | 1.00 (30/30) | 1.00 (30/30) | 1.00 (30/30) | MET |
 
 The confusion matrix is unchanged on all three seeds (13 / 10 / 8 on the
 diagonal, 0 everywhere else). Device `cpu`, recorded in
@@ -668,7 +670,7 @@ whether larger update steps would close the rest of that gap.
 | 2. F1 — `investor_inquiry` | ≥ 0.80 | 1.000 | 1.000 | 1.000 | MET |
 | 3. `speculative_hype` predicted as `fundamental_analysis` | ≤ 0.20 of the hype row | 0.00 (0/10) | 0.00 (0/10) | 0.00 (0/10) | MET |
 | 4. Predicted vs. true `fundamental_analysis` share | differ by ≤ 10 pts | 0 pts (13/31 vs 13/31) | 0 pts (13/31 vs 13/31) | 0 pts (13/31 vs 13/31) | MET |
-| 5. Agreement with staff labels | ≥ 0.70 | *pending (Milestone 3)* | | | *pending* |
+| 5. Agreement with staff labels | ≥ 0.70 | 1.00 (30/30) | 1.00 (30/30) | 1.00 (30/30) | MET |
 
 The confusion matrix is again unchanged on all three seeds (13 / 10 / 8 on the
 diagonal, 0 everywhere else).
@@ -734,8 +736,7 @@ to break those cues: `investor_inquiry` posts without a question mark,
 target (≥ 0.95). I stopped because that needs new posts collected and labelled
 with the same care as the first 205, which is more than the session allowed.
 
-**Criterion 5: pending** until my agreement check against the staff set is
-done (see Agreement Report).
+**Criterion 5: met** at 30 / 30 (see Agreement Report).
 
 
 
