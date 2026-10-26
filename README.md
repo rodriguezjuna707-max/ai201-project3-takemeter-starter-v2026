@@ -336,7 +336,7 @@ finalizing `labels.csv`.
 
 - *Ran the experiments:* it ran `baseline.py` (with my definitions, with bare
   label names, and with `--trained`), and it ran the notebook's sections 6 and 7
-  for the before and after three-seed runs. It used the notebook's own code
+  for the before, after and after2 (stretch) three-seed runs. It used the notebook's own code
   and skipped the single-run sections 4–5, so `results.json` and
   `test_split.csv` from unit 5 were not overwritten.
 - *Spotted patterns in my errors and data:* it checked whether my perfect
