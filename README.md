@@ -362,6 +362,27 @@ finalizing `labels.csv`.
 
 ---
 
+## Stretch Features — declared before building
+
+I'm attempting two stretch items. This declaration is committed before either
+one is built:
+
+1. **Confidence check.** Using the `confidence` block the notebook writes for
+   each seed, I'll report whether the model's most-confident third of
+   predictions is right more often than its least-confident third, with the
+   numbers for both runs. The per-seed confidence values were already in the
+   results files from section 6; the comparison and write-up are what I'm
+   adding.
+2. **A second measured improvement.** One more training change aimed at the
+   same diagnosed weakness (right but unsure): learning rate 2e-5 → 5e-5,
+   keeping 6 epochs and everything else, run across the same three seeds with
+   `RUN_LABEL = "after2"` and logged as a third run log in the same format.
+
+I am not attempting the per-label error write-up: my confusion matrix has
+zero errors on every seed, so there is no worst label to analyse.
+
+---
+
 ## Baseline vs. Trained
 
 <!-- Both models on the same posts. `python baseline.py --trained results.json`
