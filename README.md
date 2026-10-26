@@ -332,6 +332,29 @@ pre-labelled in batches by Claude using my label definitions and decision rule.
 I read every one and corrected about 15% of the suggested labels before
 finalizing `labels.csv`.
 
+**Unit 6 — what Claude Code did, disclosed:**
+
+- *Ran the experiments:* it ran `baseline.py` (with my definitions, with bare
+  label names, and with `--trained`), and it ran the notebook's sections 6 and 7
+  for the before and after three-seed runs. It used the notebook's own code
+  and skipped the single-run sections 4–5, so `results.json` and
+  `test_split.csv` from unit 5 were not overwritten.
+- *Spotted patterns in my errors and data:* it checked whether my perfect
+  score came from leakage (no test post is more than 80% similar to a training
+  post on any seed) and pointed out that the model was right but only
+  0.56–0.59 confident. That finding became my improvement. It also caught that
+  "58 of 65 hype posts contain numbers" counts ticker `$` signs; the true digit
+  count is 49.
+- *Drafted write-up text:* it filled in the run logs, verdicts and the
+  confusion matrix from the results files, and drafted the diagnosis and
+  improvement paragraphs. I chose which target was too low (accuracy, tightened
+  to ≥ 0.95) and which improvement to make (more epochs). My prediction is my
+  own sentence; Claude Code only tightened the wording and filled in the
+  verified count.
+- *What it did not do:* it did not label the 30 staff posts or open the staff
+  answer key before my labels were saved. The adjudication calls in the
+  Agreement Report are mine.
+
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
      Don't fill these in during unit 5.
@@ -554,24 +577,54 @@ its starting point. This is the failure the improvement targets.
 
 ## The Improvement
 
-**What I changed:**
+**What I changed:** One training setting: `EPOCHS` from 3 to 6 in section 2 of
+the notebook. Everything else is the same: same `labels.csv`, same seeds (42,
+7, 2024), learning rate 2e-5, batch size 16, 128 tokens, device `cpu`.
+`RUN_LABEL` was set to `"after"`, so the before-numbers in
+`results_three_seeds_before.json` were not overwritten.
 
-**Which diagnosis pointed at it:**
+**Which diagnosis pointed at it:** The model was right on every test post but
+only 0.556–0.590 confident on average (see Diagnoses). With about 27 optimiser
+steps in total, that looked like undertraining, not a labelling problem, so
+the fix was more training, not relabelling. I wrote that diagnosis and
+committed it (`d4fcfa3`) before the after-run finished.
 
 ### Run Log — After
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Overall accuracy | ≥ 0.80 | 1.000 | 1.000 | 1.000 | MET |
+| 2. F1 — `investor_inquiry` | ≥ 0.80 | 1.000 | 1.000 | 1.000 | MET |
+| 3. `speculative_hype` predicted as `fundamental_analysis` | ≤ 0.20 of the hype row | 0.00 (0/10) | 0.00 (0/10) | 0.00 (0/10) | MET |
+| 4. Predicted vs. true `fundamental_analysis` share | differ by ≤ 10 pts | 0 pts (13/31 vs 13/31) | 0 pts (13/31 vs 13/31) | 0 pts (13/31 vs 13/31) | MET |
+| 5. Agreement with staff labels | ≥ 0.70 | *pending (Milestone 3)* | | | *pending* |
+
+The confusion matrix is unchanged on all three seeds (13 / 10 / 8 on the
+diagonal, 0 everywhere else). Device `cpu`, recorded in
+`results_three_seeds_after.json`.
+
+The measure the change targeted, mean confidence when right, from the
+`confidence` block of each results file:
+
+| Run | Seed 42 | Seed 7 | Seed 2024 |
+|---|---|---|---|
+| Before (3 epochs) | 0.590 | 0.556 | 0.584 |
+| After (6 epochs) | 0.868 | 0.840 | 0.858 |
+| Change | +0.278 | +0.284 | +0.274 |
 
 **Did it help, and how do I know:**
 
 <!-- If it didn't, say so. Relabelling that didn't help is a genuinely
      interesting result and earns full credit. -->
+It helped with the weakness it targeted and changed nothing the criteria
+measure. Confidence on correct predictions rose by about 0.28 on every seed
+(from 0.56–0.59 to 0.84–0.87), and the rise is consistent across all three
+splits, so it isn't one lucky draw. The five criteria couldn't show an
+improvement, because accuracy, F1 and the confusion matrix were already
+perfect and stayed perfect. Doubling the epochs also cost no accuracy, so
+there is no sign of overfitting on these splits. The limit is that higher
+confidence on an easy test set doesn't prove the model learned my boundary;
+see What's Still Broken.
 
 
 
@@ -580,12 +633,32 @@ its starting point. This is the failure the improvement targets.
 ## What's Still Broken
 
 <!-- For each criterion still missed: what you'd do, and why you stopped. -->
+**Criteria 1–4: none missed.** All four held on every seed, before and after.
+What's broken is the measurement, not the model: my test splits are too easy
+to tell a model that learned my boundary from one that learned the surface
+cues. If I kept going, I'd add a hard test set of about 30 new posts written
+to break those cues: `investor_inquiry` posts without a question mark,
+`speculative_hype` posts that quote real-looking figures, and enthusiastic
+`fundamental_analysis` posts. I'd re-score against my tightened accuracy
+target (≥ 0.95). I stopped because that needs new posts collected and labelled
+with the same care as the first 205, which is more than the session allowed.
+
+**Criterion 5: pending** until my agreement check against the staff set is
+done (see Agreement Report).
 
 
 
 **The gap between what I meant my labels to capture and what the model
 learned:**
 <!-- Two sentences. Your confusion matrix is the evidence. -->
+I meant my labels to capture whether a post's view of a stock is backed by
+evidence from the company's financials, and the confusion matrix shows zero
+errors on every seed, including the `speculative_hype` →
+`fundamental_analysis` boundary I expected to be hardest. But every
+`investor_inquiry` post in my data has a question mark and the analysis posts
+cite financial figures, so a clean matrix can't tell me whether the model
+learned that evidence standard or just learned punctuation and number
+patterns.
 
 
 

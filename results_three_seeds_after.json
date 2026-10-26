@@ -1,0 +1,164 @@
+[
+  {
+    "seed": 42,
+    "n_test": 31,
+    "accuracy": 1.0,
+    "f1_macro": 1.0,
+    "per_label": {
+      "fundamental_analysis": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 13
+      },
+      "speculative_hype": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 10
+      },
+      "investor_inquiry": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 8
+      }
+    },
+    "confusion": {
+      "fundamental_analysis": {
+        "fundamental_analysis": 13,
+        "speculative_hype": 0,
+        "investor_inquiry": 0
+      },
+      "speculative_hype": {
+        "fundamental_analysis": 0,
+        "speculative_hype": 10,
+        "investor_inquiry": 0
+      },
+      "investor_inquiry": {
+        "fundamental_analysis": 0,
+        "speculative_hype": 0,
+        "investor_inquiry": 8
+      }
+    },
+    "confidence": {
+      "mean_when_right": 0.8677853345870972,
+      "mean_when_wrong": null,
+      "accuracy_most_confident_third": 1.0,
+      "accuracy_least_confident_third": 1.0,
+      "n_per_third": 10
+    },
+    "device": "cpu",
+    "device_name": "CPU",
+    "torch_version": "2.14.1+cpu",
+    "max_length": 128
+  },
+  {
+    "seed": 7,
+    "n_test": 31,
+    "accuracy": 1.0,
+    "f1_macro": 1.0,
+    "per_label": {
+      "fundamental_analysis": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 13
+      },
+      "speculative_hype": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 10
+      },
+      "investor_inquiry": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 8
+      }
+    },
+    "confusion": {
+      "fundamental_analysis": {
+        "fundamental_analysis": 13,
+        "speculative_hype": 0,
+        "investor_inquiry": 0
+      },
+      "speculative_hype": {
+        "fundamental_analysis": 0,
+        "speculative_hype": 10,
+        "investor_inquiry": 0
+      },
+      "investor_inquiry": {
+        "fundamental_analysis": 0,
+        "speculative_hype": 0,
+        "investor_inquiry": 8
+      }
+    },
+    "confidence": {
+      "mean_when_right": 0.8400996923446655,
+      "mean_when_wrong": null,
+      "accuracy_most_confident_third": 1.0,
+      "accuracy_least_confident_third": 1.0,
+      "n_per_third": 10
+    },
+    "device": "cpu",
+    "device_name": "CPU",
+    "torch_version": "2.14.1+cpu",
+    "max_length": 128
+  },
+  {
+    "seed": 2024,
+    "n_test": 31,
+    "accuracy": 1.0,
+    "f1_macro": 1.0,
+    "per_label": {
+      "fundamental_analysis": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 13
+      },
+      "speculative_hype": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 10
+      },
+      "investor_inquiry": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 8
+      }
+    },
+    "confusion": {
+      "fundamental_analysis": {
+        "fundamental_analysis": 13,
+        "speculative_hype": 0,
+        "investor_inquiry": 0
+      },
+      "speculative_hype": {
+        "fundamental_analysis": 0,
+        "speculative_hype": 10,
+        "investor_inquiry": 0
+      },
+      "investor_inquiry": {
+        "fundamental_analysis": 0,
+        "speculative_hype": 0,
+        "investor_inquiry": 8
+      }
+    },
+    "confidence": {
+      "mean_when_right": 0.8581432104110718,
+      "mean_when_wrong": null,
+      "accuracy_most_confident_third": 1.0,
+      "accuracy_least_confident_third": 1.0,
+      "n_per_third": 10
+    },
+    "device": "cpu",
+    "device_name": "CPU",
+    "torch_version": "2.14.1+cpu",
+    "max_length": 128
+  }
+]
