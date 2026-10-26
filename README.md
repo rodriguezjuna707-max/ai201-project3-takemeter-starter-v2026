@@ -649,6 +649,76 @@ see What's Still Broken.
 
 
 
+### Second Improvement (stretch)
+
+**What I changed:** One more training setting, on top of the first
+improvement: learning rate 2e-5 → 5e-5, keeping 6 epochs. Same `labels.csv`,
+same seeds, batch size 16, 128 tokens, device `cpu`. `RUN_LABEL = "after2"`
+wrote `results_three_seeds_after2.json`, so both earlier files are untouched.
+
+**Which diagnosis pointed at it:** The same one: right but unsure. After the
+first improvement the model was still only 0.84–0.87 confident, so I tested
+whether larger update steps would close the rest of that gap.
+
+### Run Log — After 2
+
+| Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
+|---|---|---|---|---|---|
+| 1. Overall accuracy | ≥ 0.80 | 1.000 | 1.000 | 1.000 | MET |
+| 2. F1 — `investor_inquiry` | ≥ 0.80 | 1.000 | 1.000 | 1.000 | MET |
+| 3. `speculative_hype` predicted as `fundamental_analysis` | ≤ 0.20 of the hype row | 0.00 (0/10) | 0.00 (0/10) | 0.00 (0/10) | MET |
+| 4. Predicted vs. true `fundamental_analysis` share | differ by ≤ 10 pts | 0 pts (13/31 vs 13/31) | 0 pts (13/31 vs 13/31) | 0 pts (13/31 vs 13/31) | MET |
+| 5. Agreement with staff labels | ≥ 0.70 | *pending (Milestone 3)* | | | *pending* |
+
+The confusion matrix is again unchanged on all three seeds (13 / 10 / 8 on the
+diagonal, 0 everywhere else).
+
+Mean confidence when right, across all three runs:
+
+| Run | Seed 42 | Seed 7 | Seed 2024 |
+|---|---|---|---|
+| Before (3 epochs, lr 2e-5) | 0.590 | 0.556 | 0.584 |
+| After (6 epochs, lr 2e-5) | 0.868 | 0.840 | 0.858 |
+| After 2 (6 epochs, lr 5e-5) | 0.985 | 0.980 | 0.983 |
+
+**Did it help, and how do I know:** It helped with the targeted weakness, by
+less than the first change and with a caveat. Confidence rose again on every
+seed, by about 0.12–0.14, to 0.98–0.99, so the model is now close to certain
+on every test post. The five criteria again couldn't move, since they were
+already perfect. The caveat is that near-certain confidence on an easy test
+set is also what overconfidence looks like. Without posts that break my
+surface cues (see What's Still Broken), I can't tell whether the model is
+justifiably sure or just sure, so I count this as a measured but limited gain.
+
+## Stretch: Confidence Check
+
+**Question:** Are the model's most-confident predictions right more often than
+its least-confident ones? This comes from the `confidence` block in each
+results file: test posts are ranked by the model's top softmax score and the
+accuracy of the top third is compared with the bottom third (10 posts each).
+
+| Run | Seed | Most-confident third | Least-confident third | Mean conf. when right | Mean conf. when wrong |
+|---|---|---|---|---|---|
+| Before | 42 | 1.00 (10/10) | 1.00 (10/10) | 0.590 | — (no errors) |
+| Before | 7 | 1.00 (10/10) | 1.00 (10/10) | 0.556 | — (no errors) |
+| Before | 2024 | 1.00 (10/10) | 1.00 (10/10) | 0.584 | — (no errors) |
+| After | 42 | 1.00 (10/10) | 1.00 (10/10) | 0.868 | — (no errors) |
+| After | 7 | 1.00 (10/10) | 1.00 (10/10) | 0.840 | — (no errors) |
+| After | 2024 | 1.00 (10/10) | 1.00 (10/10) | 0.858 | — (no errors) |
+| After 2 | 42 | 1.00 (10/10) | 1.00 (10/10) | 0.985 | — (no errors) |
+| After 2 | 7 | 1.00 (10/10) | 1.00 (10/10) | 0.980 | — (no errors) |
+| After 2 | 2024 | 1.00 (10/10) | 1.00 (10/10) | 0.983 | — (no errors) |
+
+**Answer: no.** The confident predictions are not right more often than the
+unsure ones; both thirds are 100% right on every seed of every run. That's
+not because confidence is meaningless. With zero wrong predictions there is
+nothing for confidence to separate, so there's no "mean confidence when
+wrong" to compare against. On my test splits, confidence can't be
+checked as a warning sign. What the check did show is that the model's
+confidence level is set mostly by training length and learning rate, not by
+how hard a post is: it rose from about 0.58 to 0.98 across the three runs
+while accuracy stayed fixed at 1.000.
+
 ---
 
 ## What's Still Broken
