@@ -346,10 +346,23 @@ finalizing `labels.csv`.
 
 | Measure | Baseline | Trained | Difference |
 |---|---|---|---|
-| Overall accuracy |  |  |  |
-| Macro F1 |  |  |  |
-| F1 — `label_one` |  |  |  |
-| F1 — `label_two` |  |  |  |
+| Overall accuracy | 0.645 | 1.000 | +0.355 |
+| Macro F1 | 0.607 | 1.000 | +0.393 |
+| F1 — `fundamental_analysis` | 0.703 | 1.000 | +0.297 |
+| F1 — `investor_inquiry` | 0.545 | 1.000 | +0.455 |
+| F1 — `speculative_hype` | 0.571 | 1.000 | +0.429 |
+
+Both columns are scored on the same 31 held-out posts in `test_split.csv`
+(13 / 8 / 10). The baseline is `facebook/bart-large-mnli` zero-shot, prompted
+with the definitions in `label_definitions.txt` (definitions only, not the
+decision rule).
+
+**What the definitions were worth:** the same baseline run with bare label
+names instead (`baseline_results_bare_names.json`) scored 0.419 accuracy and
+0.379 macro F1, with F1 0.000 on `fundamental_analysis`, 0.471 on
+`investor_inquiry` and 0.667 on `speculative_hype`. The definitions added
++0.226 accuracy and +0.228 macro F1. The baseline reported above is the
+definitions run.
 
 **What I predicted before I looked:**
 <!-- Milestone 1 asks you to write this BEFORE seeing the trained numbers. A

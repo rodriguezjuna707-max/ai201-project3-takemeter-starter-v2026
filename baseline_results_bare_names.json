@@ -1,0 +1,189 @@
+{
+  "model": "facebook/bart-large-mnli",
+  "n": 31,
+  "seed": 42,
+  "held_out": true,
+  "used_definitions": false,
+  "scores": {
+    "n": 31,
+    "accuracy": 0.41935483870967744,
+    "f1_macro": 0.3790849673202614,
+    "per_label": {
+      "fundamental_analysis": {
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1": 0.0,
+        "support": 13
+      },
+      "investor_inquiry": {
+        "precision": 0.3076923076923077,
+        "recall": 1.0,
+        "f1": 0.47058823529411764,
+        "support": 8
+      },
+      "speculative_hype": {
+        "precision": 1.0,
+        "recall": 0.5,
+        "f1": 0.6666666666666666,
+        "support": 10
+      }
+    }
+  },
+  "predictions": [
+    {
+      "text": "Build-A-Bear Workshop ($BBW) trades at 6.8x trailing P/E with $45M net cash, zero funded debt, and a consistent 15% ROIC. Share buybacks reduced share count by 18% in two years.",
+      "gold": "fundamental_analysis",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "This underappreciated micro-cap biotech stock is about to explode 10x after phase 2 results. Best risk/reward on the entire market!",
+      "gold": "speculative_hype",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "Argan Inc ($AGX) holds $410M in cash and investments with zero debt. Market cap is $600M, meaning EV is $190M against $50M operating profit.",
+      "gold": "fundamental_analysis",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "Should I be concerned about a customer concentration where one client accounts for 40% of annual revenue?",
+      "gold": "investor_inquiry",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "Cepton ($CPTN) automotive lidar provider buyout rumor circulating. Insiders know something big is loading!",
+      "gold": "speculative_hype",
+      "predicted": "speculative_hype"
+    },
+    {
+      "text": "Citizens Holding Co ($CIZN) micro-cap community bank trading at 0.52x Tangible Book Value with 11.8% CET1 capital ratio.",
+      "gold": "fundamental_analysis",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "Markforged ($MKFG) industrial 3D printing is massively undervalued. Takeover bid coming soon at 4x current stock price!",
+      "gold": "speculative_hype",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "Compass ($COMP) real estate brokerage market share winner. Once housing inventory rebounds, stock will explode 300%!",
+      "gold": "speculative_hype",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "Fisker ($FSRN) asset liquidation rumor is fake news. Insiders are accumulating and a rescue package will send this 10x!",
+      "gold": "speculative_hype",
+      "predicted": "speculative_hype"
+    },
+    {
+      "text": "Luminar Technologies ($LAZR) lidar standardization across Volvo models makes this a guaranteed 5x play by 2026!",
+      "gold": "speculative_hype",
+      "predicted": "speculative_hype"
+    },
+    {
+      "text": "Shift4 ($FOUR) is currently trading at an 8.6 forward P/E despite generating over $250M in free cash flow annually and posting 21% YoY revenue growth. Enterprise value to EBITDA is just 6.2x.",
+      "gold": "fundamental_analysis",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "Redfin ($RDFN) digital brokerage platform dominance. Shorts are overextended and rate cuts will trigger a monster pump!",
+      "gold": "speculative_hype",
+      "predicted": "speculative_hype"
+    },
+    {
+      "text": "Seacor Marine ($SMHI) vessel operator trading at 0.42x Net Asset Value as fleet utilization reaches 82% across international basins.",
+      "gold": "fundamental_analysis",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "Intuitive Machines ($LUNR) moon lander contract success proves their tech superiority. Stock will easily 4x from here!",
+      "gold": "speculative_hype",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "How do you evaluate the risk of equity dilution during out-of-court corporate debt restructuring negotiations?",
+      "gold": "investor_inquiry",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "Skyworks Solutions ($SWKS) trades at 10.5x forward P/E generating $1.4B in annual FCF. Dividend yield is 3.8% with a 35% payout ratio.",
+      "gold": "fundamental_analysis",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "Atkore ($ATKR) generates $450M in annual FCF on a $5B market cap, trading at 7.2x forward P/E while repurchasing 8% of outstanding shares annually.",
+      "gold": "fundamental_analysis",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "How do you calculate tangible net asset value (TNAV) when a balance sheet has significant intangible customer lists?",
+      "gold": "investor_inquiry",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "This low-float cybersecurity company is poised for a massive takeover bid. Insiders know something big is brewing!",
+      "gold": "speculative_hype",
+      "predicted": "speculative_hype"
+    },
+    {
+      "text": "MIPS AB maintains a 70%+ gross profit margin and a net-debt to EBITDA of 0.5x. Trading at 245 SEK (6-year lows), forward P/E is 25.6x compared to its historical 50x-80x range.",
+      "gold": "fundamental_analysis",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "Are there specific red flags in 10-K Footnotes regarding pension obligations that indicate hidden balance sheet liabilities?",
+      "gold": "investor_inquiry",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "What metrics help determine if a high dividend yield (>8%) is sustainable or about to be cut in mid-cap energy MLPs?",
+      "gold": "investor_inquiry",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "Timber REIT trading at 35% discount to Net Asset Value (NAV), with $850M in raw timberland assets and only $110M in total liabilities.",
+      "gold": "fundamental_analysis",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "Gevo ($GEVO) sustainable aviation fuel contracts will send revenue parabolic. Stock is primed for a 10x rally!",
+      "gold": "speculative_hype",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "When doing undervalued stock analysis, what are your golden steps? Do you look at DCF models or focus primarily on Price to Book ratios?",
+      "gold": "investor_inquiry",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "What screening tools or platforms do you use to find micro-caps trading at or below net cash value?",
+      "gold": "investor_inquiry",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "Precision Drilling ($PDS) reduced debt by $150M in 2023, trading at 3.2x EV/EBITDA with Canadian drilling activity expanding.",
+      "gold": "fundamental_analysis",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "Flexsteel Industries ($FLXS) holds $28M net cash with a market cap of $85M. P/B is 0.72x and operating margin recovered to 6.4%.",
+      "gold": "fundamental_analysis",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "How do you approach valuing unmonetized patent portfolios or intellectual property in micro-cap tech firms?",
+      "gold": "investor_inquiry",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "LSI Industries ($LYTS) lighting segment expanding margins to 11.2%, trading at 8.2x EV/EBITDA with Net Debt/EBITDA down to 0.8x.",
+      "gold": "fundamental_analysis",
+      "predicted": "investor_inquiry"
+    },
+    {
+      "text": "Inmode ($INMD) sits on $700M in cash and short-term investments with no debt. Market cap is $1.3B, meaning cash is over 50% of market cap. Generating $150M annual FCF.",
+      "gold": "fundamental_analysis",
+      "predicted": "investor_inquiry"
+    }
+  ]
+}
