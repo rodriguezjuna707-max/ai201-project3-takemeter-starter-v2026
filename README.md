@@ -485,6 +485,15 @@ reach 0.80 without learning the hard `fundamental_analysis` /
 these 31-post test splits are too easy to separate a good model from a
 perfect one, not that the model is flawless.
 
+**The weakness the criteria don't show: the model is right but unsure.**
+Its mean confidence on posts it got right was 0.590 (seed 42), 0.556 (seed 7)
+and 0.584 (seed 2024), from the `confidence` block in
+`results_three_seeds_before.json`. With three labels a blind guess sits at
+0.33, so the model picks the right label but only just prefers it. That
+points at training, not labelling: 3 epochs over about 143 training posts is
+about 27 optimiser steps at batch size 16, so the model has barely moved from
+its starting point. This is the failure the improvement targets.
+
 
 
 ---
