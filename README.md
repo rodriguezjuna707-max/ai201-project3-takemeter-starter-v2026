@@ -393,11 +393,11 @@ behind at +0.429.
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1. Overall accuracy | ≥ 0.80 | 1.000 | 1.000 | 1.000 |  |
-| 2. F1 — `investor_inquiry` | ≥ 0.80 | 1.000 | 1.000 | 1.000 |  |
-| 3. `speculative_hype` predicted as `fundamental_analysis` | ≤ 0.20 of the hype row | 0.00 (0/10) | 0.00 (0/10) | 0.00 (0/10) |  |
-| 4. Predicted vs. true `fundamental_analysis` share | differ by ≤ 10 pts | 0 pts (13/31 vs 13/31) | 0 pts (13/31 vs 13/31) | 0 pts (13/31 vs 13/31) |  |
-| 5. Agreement with staff labels | ≥ 0.70 | *pending (Milestone 3)* | | |  |
+| 1. Overall accuracy | ≥ 0.80 | 1.000 | 1.000 | 1.000 | MET |
+| 2. F1 — `investor_inquiry` | ≥ 0.80 | 1.000 | 1.000 | 1.000 | MET |
+| 3. `speculative_hype` predicted as `fundamental_analysis` | ≤ 0.20 of the hype row | 0.00 (0/10) | 0.00 (0/10) | 0.00 (0/10) | MET |
+| 4. Predicted vs. true `fundamental_analysis` share | differ by ≤ 10 pts | 0 pts (13/31 vs 13/31) | 0 pts (13/31 vs 13/31) | 0 pts (13/31 vs 13/31) | MET |
+| 5. Agreement with staff labels | ≥ 0.70 | *pending (Milestone 3)* | | | *pending* |
 
 **Device:** `cpu` (CPU), recorded in `results_three_seeds_before.json` for
 every seed. Seeds 42, 7 and 2024; 3 epochs, learning rate 2e-5, batch size 16,
@@ -451,11 +451,11 @@ confused no pair of labels in either direction, including the
 
 | # | Criterion | Target | Verdict | How I decided |
 |---|---|---|---|---|
-| 1 |  |  |  |  |
-| 2 |  |  |  |  |
-| 3 |  |  |  |  |
-| 4 |  |  |  |  |
-| 5 |  |  |  |  |
+| 1 | Overall accuracy | ≥ 0.80 | MET | 1.000 on all three seeds; the lowest seed is above 0.80. |
+| 2 | F1 — `investor_inquiry` | ≥ 0.80 | MET | 1.000 on all three seeds (8 of 8 inquiry posts right each time). |
+| 3 | `speculative_hype` predicted as `fundamental_analysis` | ≤ 0.20 | MET | 0 of 10 hype posts went to `fundamental_analysis` on any seed, so 0.00 every time. |
+| 4 | Predicted vs. true `fundamental_analysis` share | ≤ 10 pts apart | MET | The model predicted 13 of 31 as `fundamental_analysis` on every seed, exactly the true 13, so the gap is 0 pts. |
+| 5 | Agreement with staff labels | ≥ 0.70 | *pending* | Waiting on `agreement.py` (Milestone 3). |
 
 **Diagnoses**
 
@@ -467,6 +467,23 @@ confused no pair of labels in either direction, including the
      ⚠️ Use your agreement report as evidence. It is the only instrument you
      have that can tell a LABELLING problem from a MODEL problem, and this
      section is graded on whether you used it that way. -->
+**No misses on criteria 1–4.** Every target held on all three seeds with no
+errors at all, so there is nothing to diagnose there. Instead, the finding is
+that one of my targets was set too low.
+
+**Target set too low: criterion 1, overall accuracy ≥ 0.80.** That target
+allowed 6 wrong out of 31, and the model got 0 wrong on every seed. It also
+barely asked for more than the zero-shot baseline, which already reached
+0.645 from my definitions alone (see Baseline vs. Trained). My labels have
+strong surface signals: every `investor_inquiry` post contains a question
+mark, and `fundamental_analysis` posts cite financial figures. A model could
+reach 0.80 without learning the hard `fundamental_analysis` /
+`speculative_hype` boundary at all.
+
+**Tighter target: overall accuracy ≥ 0.95** on every seed, which allows at most
+1 error in 31. All three seeds would still meet it at 1.000. That tells me
+these 31-post test splits are too easy to separate a good model from a
+perfect one, not that the model is flawless.
 
 
 
