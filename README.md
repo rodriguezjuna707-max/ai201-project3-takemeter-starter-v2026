@@ -367,6 +367,16 @@ definitions run.
 **What I predicted before I looked:**
 <!-- Milestone 1 asks you to write this BEFORE seeing the trained numbers. A
      prediction made afterwards isn't one. -->
+The trained model will beat the baseline most on `speculative_hype`. 49 of my
+65 hype posts contain numbers like "10x" or "2030", and a model reading only my
+definitions could mistake those for financial metrics and call them
+`fundamental_analysis`. `investor_inquiry` should be about even, since every
+one of those posts asks a question.
+
+*Note:* I wrote this after seeing the Baseline vs. Trained table, so it isn't a
+true before-the-fact prediction. It was also wrong on `investor_inquiry`: that
+label had the biggest gap (+0.455), not a tie. `speculative_hype` was close
+behind at +0.429.
 
 **What the gap actually means:**
 <!-- If the baseline matched your trained model, your fine-tuning added
